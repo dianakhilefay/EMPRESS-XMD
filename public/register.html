@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Create your Void V4 account and start using the ultimate WhatsApp bot gateway platform.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Enterprise Gateway</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="/"><i class="fas fa-home"></i> Home</a>
+      <a href="/#features"><i class="fas fa-star"></i> Features</a>
+      <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+    <button class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <div class="auth-card auth-card-simple">
+      <!-- Register Form -->
+      <div class="auth-form-section auth-form-centered">
+        <div class="auth-form-header">
+          <h1 class="auth-form-title">Create Account</h1>
+          <p class="auth-form-subtitle">Fill in your details to get started</p>
+        </div>
+
+        <form id="registerForm" class="auth-form" autocomplete="off">
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="fas fa-envelope"></i> Email Address
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                class="form-input"
+                placeholder="your.email@example.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+            <span class="form-hint">We'll never share your email with anyone else</span>
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="form-label">
+              <i class="fas fa-user"></i> Username
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="username" 
+                name="username"
+                class="form-input"
+                placeholder="Choose a unique username"
+                required
+                minlength="6"
+                pattern="[a-zA-Z0-9_]+"
+                autocomplete="username"
+              />
+            </div>
+            <span class="form-hint">Minimum 6 characters, letters, numbers and underscores only</span>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="fas fa-lock"></i> Password
+            </label>
+            <div class="input-wrapper password-wrapper">
+              <input 
+                type="password" 
+                id="password" 
+                name="password"
+                class="form-input"
+                placeholder="Create a strong password"
+                required
+                minlength="8"
+                autocomplete="new-password"
+              />
+              <button type="button" class="toggle-password" id="togglePassword">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <span class="form-hint">At least 8 characters</span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">
+              <i class="fas fa-lock"></i> Confirm Password
+            </label>
+            <div class="input-wrapper password-wrapper">
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                name="confirmPassword"
+                class="form-input"
+                placeholder="Re-enter your password"
+                required
+                minlength="8"
+                autocomplete="new-password"
+              />
+              <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="referralNotice" style="display: none; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+            <p style="margin: 0; color: #22d3ee; font-size: 14px;">
+              <i class="fas fa-gift" style="margin-right: 8px;"></i>
+              <span id="referralNoticeText">Registering with referral code</span>
+            </p>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+              <span class="checkmark"></span>
+              <span class="checkbox-label">I agree to the <a href="#" class="inline-link">Terms of Service</a> and <a href="#" class="inline-link">Privacy Policy</a></span>
+            </label>
+          </div>
+
+          <div id="registerStatus" class="form-status"></div>
+
+          <button type="submit" class="btn auth-btn" id="registerBtn">
+            <i class="fas fa-user-plus"></i>
+            <span>Create Account</span>
+          </button>
+        </form>
+
+        <div class="auth-divider">
+          <span>or continue with</span>
+        </div>
+
+        <div class="social-login-buttons">
+          <button type="button" class="social-login-btn github-btn">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </button>
+          <button type="button" class="social-login-btn google-btn">
+            <i class="fab fa-google"></i>
+            <span>Google</span>
+          </button>
+        </div>
+
+        <div class="auth-footer">
+          <p>Already have an account? <a href="/login" class="auth-link">Sign in here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="auth-page-footer">
+    <p>© <span id="year"></span> Void V4 Enterprise. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <span>•</span>
+      <a href="#">Terms</a>
+      <span>•</span>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
