@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Support Ticket - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Create a support ticket for Void V4 WhatsApp bot.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="ticket.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-text">V4</div>
+      </div>
+      <div class="splash-text">Loading Support...</div>
+      <div class="splash-progress">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="dashboard-nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Support</div>
+      </div>
+    </div>
+    
+    <div class="nav-actions">
+      <div class="profile-dropdown">
+        <button class="nav-icon-btn profile-btn" id="profileBtn">
+          <i class="fas fa-user-circle"></i>
+        </button>
+        <div class="dropdown-menu" id="profileMenu">
+          <div class="dropdown-header">
+            <div class="dropdown-user-info">
+              <i class="fas fa-user-circle dropdown-avatar"></i>
+              <div>
+                <div class="dropdown-username" id="dropdownUsername">Loading...</div>
+                <div class="dropdown-email" id="dropdownEmail">Loading...</div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/profile" class="dropdown-item">
+            <i class="fas fa-user"></i>
+            <span>My Profile</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+      
+      <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+      <h3>Menu</h3>
+      <button class="close-sidebar" id="closeSidebar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-sidebar-content">
+      <a href="/dashboard" class="sidebar-link">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="/profile" class="sidebar-link">
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </a>
+      <a href="/settings" class="sidebar-link">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+      <a href="/ticket" class="sidebar-link active">
+        <i class="fas fa-ticket-alt"></i>
+        <span>Support Ticket</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="ticket-main">
+    <div class="ticket-container">
+      <!-- Header Section -->
+      <div class="ticket-header">
+        <div class="ticket-header-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h1 class="ticket-title">Support Center</h1>
+        <p class="ticket-subtitle">Need help? We're here to assist you</p>
+      </div>
+
+      <!-- Active Ticket Display -->
+      <div id="activeTicketSection" style="display: none;">
+        <div class="active-ticket-card">
+          <div class="active-ticket-header">
+            <div class="active-ticket-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <h3>Active Ticket</h3>
+              <p>You have an open support ticket</p>
+            </div>
+          </div>
+          <div class="active-ticket-body">
+            <div class="ticket-info-row">
+              <span class="ticket-info-label">Ticket ID:</span>
+              <span class="ticket-info-value" id="activeTicketId">-</span>
+            </div>
+            <div class="ticket-info-row">
+              <span class="ticket-info-label">Reason:</span>
+              <span class="ticket-info-value" id="activeTicketReason">-</span>
+            </div>
+            <div class="ticket-info-row">
+              <span class="ticket-info-label">Status:</span>
+              <span class="ticket-status-badge" id="activeTicketStatus">-</span>
+            </div>
+            <div class="ticket-info-row">
+              <span class="ticket-info-label">Created:</span>
+              <span class="ticket-info-value" id="activeTicketDate">-</span>
+            </div>
+            <div class="ticket-message-box">
+              <strong>Your Message:</strong>
+              <p id="activeTicketMessage">-</p>
+            </div>
+          </div>
+          <div class="active-ticket-note">
+            <i class="fas fa-info-circle"></i>
+            <span>You can create a new ticket once this one is resolved</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Ticket Form -->
+      <div id="createTicketSection">
+        <div class="ticket-card">
+          <div class="ticket-card-header">
+            <i class="fas fa-plus-circle"></i>
+            <h2>Create New Ticket</h2>
+          </div>
+          
+          <form id="ticketForm" class="ticket-form">
+            <div class="form-group">
+              <label for="ticketReason" class="form-label">
+                <i class="fas fa-tag"></i>
+                Select Reason
+              </label>
+              <select id="ticketReason" name="reason" class="form-select" required>
+                <option value="">Choose a reason...</option>
+                <option value="About Website">About Website</option>
+                <option value="Bot Command Problem">Bot Command Problem</option>
+                <option value="Command Request">Command Request</option>
+                <option value="Other Problem">Other Problem</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ticketMessage" class="form-label">
+                <i class="fas fa-comment-alt"></i>
+                Your Message
+              </label>
+              <textarea 
+                id="ticketMessage" 
+                name="message" 
+                class="form-textarea" 
+                rows="6"
+                placeholder="Please describe your issue in detail..."
+                required
+                minlength="10"
+              ></textarea>
+              <div class="form-help">
+                <i class="fas fa-info-circle"></i>
+                Minimum 10 characters required
+              </div>
+            </div>
+
+            <div class="response-time-notice">
+              <div class="notice-icon">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+              <div class="notice-content">
+                <h4>Response Time</h4>
+                <p>Our team typically responds within <strong>3-7 business days</strong>, depending on the volume of requests received.</p>
+              </div>
+            </div>
+
+            <div id="ticketStatus" class="status-message"></div>
+
+            <button type="submit" class="submit-btn" id="submitTicketBtn">
+              <i class="fas fa-paper-plane"></i>
+              <span>Submit Ticket</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card">
+            <div class="info-card-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email Confirmation</h3>
+            <p>You'll receive an email confirmation with your ticket details</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>One Ticket Limit</h3>
+            <p>You can create one ticket at a time to ensure quality support</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Track Status</h3>
+            <p>Your active ticket will be displayed on this page</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© <span id="year"></span> Void V4 Enterprise. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" onclick="return false;">Privacy</a>
+      <span>•</span>
+      <a href="#" onclick="return false;">Terms</a>
+      <span>•</span>
+      <a href="#" onclick="return false;">Support</a>
+    </div>
+  </footer>
+
+  <script src="ticket.js"></script>
+</body>
+</html>
