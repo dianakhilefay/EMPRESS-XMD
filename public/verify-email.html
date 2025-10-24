@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verify Email - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Verify your email to complete registration on Void V4 Enterprise Gateway.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Enhanced Verification Page Styles */
+    .verify-icon-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .verify-icon-wrapper {
+      position: relative;
+      width: 96px;
+      height: 96px;
+    }
+    
+    .verify-icon-glow {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #14b8a6, #06b6d4);
+      border-radius: 50%;
+      filter: blur(24px);
+      opacity: 0.4;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    .verify-icon-circle {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #14b8a6, #06b6d4, #14b8a6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .verify-icon-circle:hover {
+      transform: scale(1.1);
+    }
+    
+    .verify-icon-circle i {
+      font-size: 2.5rem;
+      color: #0d1117;
+    }
+    
+    .verify-title {
+      text-align: center;
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #5eead4, #22d3ee, #5eead4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .verify-subtitle {
+      text-align: center;
+      color: #8b949e;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .verify-form-group {
+      margin-bottom: 2rem;
+    }
+    
+    .verify-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #c9d1d9;
+    }
+    
+    .verify-label i {
+      color: #14b8a6;
+    }
+    
+    .verify-code-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: rgba(22, 27, 34, 0.5);
+      border: 2px solid #30363d;
+      border-radius: 12px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: 0.5em;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    
+    .verify-code-input::placeholder {
+      letter-spacing: normal;
+      font-size: 1.125rem;
+      color: #484f58;
+    }
+    
+    .verify-code-input:hover {
+      border-color: #484f58;
+    }
+    
+    .verify-code-input:focus {
+      border-color: #14b8a6;
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.2), 0 0 20px rgba(20, 184, 166, 0.3);
+      background: rgba(22, 27, 34, 0.8);
+      animation: inputGlowPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes inputGlowPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.2), 0 0 20px rgba(20, 184, 166, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.3), 0 0 30px rgba(20, 184, 166, 0.5);
+      }
+    }
+    
+    .verify-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #8b949e;
+      margin-top: 1rem;
+    }
+    
+    .verify-hint i {
+      color: #d29922;
+    }
+    
+    .verify-submit-btn {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, #14b8a6, #06b6d4, #14b8a6);
+      background-size: 200% 100%;
+      color: #0d1117;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .verify-submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(20, 184, 166, 0.5);
+      background-position: 100% 0;
+    }
+    
+    .verify-submit-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    .verify-submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    .verify-submit-btn i {
+      font-size: 1.25rem;
+    }
+    
+    .verify-resend-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .verify-resend-text {
+      font-size: 0.875rem;
+      color: #8b949e;
+      margin-bottom: 0.75rem;
+    }
+    
+    .verify-resend-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(22, 27, 34, 0.5);
+      color: #14b8a6;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .verify-resend-btn:hover:not(:disabled) {
+      background: rgba(30, 36, 44, 0.5);
+      border-color: rgba(20, 184, 166, 0.5);
+    }
+    
+    .verify-resend-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .verify-resend-btn:hover:not(:disabled) i {
+      transform: rotate(180deg);
+    }
+    
+    .verify-resend-btn i {
+      transition: transform 0.5s ease;
+    }
+    
+    .verify-footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #30363d;
+      text-align: center;
+    }
+    
+    .verify-footer p {
+      font-size: 0.875rem;
+      color: #8b949e;
+    }
+    
+    .verify-footer a {
+      color: #14b8a6;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .verify-footer a:hover {
+      color: #5eead4;
+      text-decoration: underline;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .verify-title {
+        font-size: 1.875rem;
+      }
+      
+      .verify-code-input {
+        font-size: 1.5rem;
+        padding: 0.875rem 1rem;
+      }
+      
+      .verify-icon-wrapper {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .verify-icon-circle i {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Enterprise Gateway</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="/"><i class="fas fa-home"></i> Home</a>
+      <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+    <button class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <div class="auth-card auth-card-simple">
+      <!-- Verify Email Form -->
+      <div class="auth-form-section auth-form-centered">
+        <!-- Animated Icon -->
+        <div class="verify-icon-container">
+          <div class="verify-icon-wrapper">
+            <div class="verify-icon-glow"></div>
+            <div class="verify-icon-circle">
+              <i class="fas fa-envelope-open-text"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-form-header">
+          <h1 class="verify-title">Verify Your Email</h1>
+          <p class="verify-subtitle" id="verifySubtitle">Enter the 6-digit code sent to your email</p>
+        </div>
+
+        <form id="verifyForm" class="auth-form" autocomplete="off">
+          <div class="verify-form-group">
+            <label for="verificationCode" class="verify-label">
+              <i class="fas fa-key"></i> 
+              <span>Verification Code</span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="verificationCode" 
+                name="verificationCode"
+                class="verify-code-input"
+                placeholder="000000"
+                required
+                maxlength="6"
+                pattern="[0-9]{6}"
+                autocomplete="off"
+              />
+            </div>
+            <div class="verify-hint">
+              <i class="fas fa-clock"></i>
+              <span>Code expires in 15 minutes</span>
+            </div>
+          </div>
+
+          <div id="verifyStatus" class="status-message"></div>
+
+          <button type="submit" class="verify-submit-btn" id="verifyBtn">
+            <i class="fas fa-check-circle"></i>
+            <span>Verify Email</span>
+          </button>
+
+          <div class="verify-resend-section">
+            <p class="verify-resend-text">Didn't receive the code?</p>
+            <button type="button" class="verify-resend-btn" id="resendBtn">
+              <i class="fas fa-redo"></i>
+              <span>Resend Code</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="verify-footer">
+          <p>
+            Already verified? 
+            <a href="/login">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© <span id="year"></span> Void V4 Enterprise. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <span>•</span>
+      <a href="#">Terms</a>
+      <span>•</span>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="verify-email.js"></script>
+</body>
+</html>
