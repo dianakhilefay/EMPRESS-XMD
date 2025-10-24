@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Manage your Void V4 profile.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-text">V4</div>
+      </div>
+      <div class="splash-text">Loading Profile...</div>
+      <div class="splash-progress">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="dashboard-nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Profile</div>
+      </div>
+    </div>
+    
+    <div class="nav-actions">
+      <a href="/dashboard" class="btn secondary-btn btn-sm">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Dashboard</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div class="dashboard-container">
+      <div class="profile-layout">
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name" id="profileName">Loading...</h1>
+            <p class="profile-email" id="profileEmail">Loading...</p>
+            <div class="profile-badge" id="profileBadge">
+              <i class="fas fa-crown"></i>
+              <span>Free Account</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+          <!-- Change Email Section -->
+          <div class="profile-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-envelope"></i>
+                Change Email
+              </h2>
+            </div>
+            <div class="card-content">
+              <form id="emailForm" class="profile-form">
+                <div class="form-group">
+                  <label for="currentPassword" class="form-label">
+                    <i class="fas fa-lock"></i>
+                    Current Password
+                  </label>
+                  <input 
+                    type="password" 
+                    id="currentPassword" 
+                    class="form-input" 
+                    placeholder="Enter current password"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="newEmail" class="form-label">
+                    <i class="fas fa-envelope"></i>
+                    New Email
+                  </label>
+                  <input 
+                    type="email" 
+                    id="newEmail" 
+                    class="form-input" 
+                    placeholder="Enter new email"
+                    required
+                  />
+                </div>
+
+                <div class="status-message" id="emailStatus"></div>
+
+                <button type="submit" class="btn primary-btn">
+                  <i class="fas fa-save"></i>
+                  <span>Update Email</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Change Password Section -->
+          <div class="profile-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-key"></i>
+                Change Password
+              </h2>
+            </div>
+            <div class="card-content">
+              <form id="passwordForm" class="profile-form">
+                <div class="form-group">
+                  <label for="currentPasswordForChange" class="form-label">
+                    <i class="fas fa-lock"></i>
+                    Current Password
+                  </label>
+                  <input 
+                    type="password" 
+                    id="currentPasswordForChange" 
+                    class="form-input" 
+                    placeholder="Enter current password"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="newPassword" class="form-label">
+                    <i class="fas fa-key"></i>
+                    New Password
+                  </label>
+                  <input 
+                    type="password" 
+                    id="newPassword" 
+                    class="form-input" 
+                    placeholder="Enter new password (min 8 characters)"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword" class="form-label">
+                    <i class="fas fa-check"></i>
+                    Confirm New Password
+                  </label>
+                  <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    class="form-input" 
+                    placeholder="Confirm new password"
+                    required
+                  />
+                </div>
+
+                <div class="password-requirements">
+                  <div class="requirement" id="req-length">
+                    <i class="fas fa-circle"></i>
+                    <span>At least 8 characters</span>
+                  </div>
+                  <div class="requirement" id="req-match">
+                    <i class="fas fa-circle"></i>
+                    <span>Passwords match</span>
+                  </div>
+                </div>
+
+                <div class="status-message" id="passwordStatus"></div>
+
+                <button type="submit" class="btn primary-btn">
+                  <i class="fas fa-save"></i>
+                  <span>Update Password</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Account Information -->
+          <div class="profile-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-info-circle"></i>
+                Account Information
+              </h2>
+            </div>
+            <div class="card-content">
+              <div class="info-list">
+                <div class="info-item">
+                  <div class="info-label">
+                    <i class="fas fa-user"></i>
+                    Username
+                  </div>
+                  <div class="info-value" id="infoUsername">-</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                  </div>
+                  <div class="info-value" id="infoEmail">-</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">
+                    <i class="fas fa-calendar"></i>
+                    Member Since
+                  </div>
+                  <div class="info-value">January 2024</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">
+                    <i class="fas fa-crown"></i>
+                    Account Type
+                  </div>
+                  <div class="info-value" id="infoAccountType">Free</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone - Delete Account -->
+          <div class="profile-card danger-zone">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Danger Zone
+              </h2>
+            </div>
+            <div class="card-content">
+              <div class="danger-zone-content">
+                <div class="danger-info">
+                  <h3>Delete Account</h3>
+                  <p>Once you delete your account, there is no going back. All your data, sessions, and configurations will be permanently deleted.</p>
+                </div>
+                <button class="btn danger-btn" id="deleteAccountBtn">
+                  <i class="fas fa-trash-alt"></i>
+                  <span>Delete Account</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Delete Account Confirmation Modal -->
+  <div class="modal-overlay" id="deleteAccountModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-icon danger">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2 class="modal-title">Delete Account?</h2>
+        <button class="modal-close" id="closeDeleteModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-message">
+          This action <strong>cannot be undone</strong>. This will permanently delete your account, sessions, and all associated data. Your email and username will be blacklisted and cannot be used again.
+        </p>
+        <div class="form-group">
+          <label for="deletePassword" class="form-label">
+            <i class="fas fa-lock"></i>
+            Enter your password to confirm
+          </label>
+          <input 
+            type="password" 
+            id="deletePassword" 
+            class="form-input" 
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div class="status-message" id="deleteStatus"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn modal-btn-cancel" id="cancelDeleteBtn">
+          Cancel
+        </button>
+        <button class="btn modal-btn-danger" id="confirmDeleteBtn">
+          <i class="fas fa-trash-alt"></i>
+          Yes, Delete My Account
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="dashboard-footer">
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> Void V4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="profile.js"></script>
+</body>
+</html>
