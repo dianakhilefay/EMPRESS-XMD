@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Settings - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Configure your Void V4 bot settings.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-text">V4</div>
+      </div>
+      <div class="splash-text">Loading Settings...</div>
+      <div class="splash-progress">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="dashboard-nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Settings</div>
+      </div>
+    </div>
+    
+    <div class="nav-actions">
+      <a href="/dashboard" class="btn secondary-btn btn-sm">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Dashboard</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div class="dashboard-container">
+      <div class="settings-layout">
+        <!-- Page Header -->
+        <div class="settings-header">
+          <h1 class="settings-title">Bot Settings</h1>
+          <p class="settings-subtitle">Configure your WhatsApp bot behavior and preferences</p>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+          <!-- Status Settings -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-eye"></i>
+                Status Settings
+              </h2>
+              <p class="card-description">Control how your bot interacts with status updates</p>
+            </div>
+            <div class="card-content">
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-eye"></i>
+                      <div>
+                        <div class="setting-name">Auto Status View</div>
+                        <div class="setting-desc">Automatically view WhatsApp statuses</div>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="autoStatusView" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-heart"></i>
+                      <div>
+                        <div class="setting-name">Auto Status Like</div>
+                        <div class="setting-desc">Automatically react to WhatsApp statuses</div>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="autoStatusReact">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-comment"></i>
+                      <div>
+                        <div class="setting-name">Auto Status Reply</div>
+                        <div class="setting-desc">Automatically reply to WhatsApp statuses</div>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="autoStatusReply">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item full-width" id="statusMessageSection" style="display: none;">
+                  <div class="setting-info">
+                    <label for="statusMessage" class="form-label">
+                      <i class="fas fa-message"></i>
+                      Status Reply Message
+                    </label>
+                    <textarea 
+                      id="statusMessage" 
+                      class="form-textarea" 
+                      rows="3"
+                      placeholder="Enter your custom status reply message"
+                    >_status seen by Void V4_</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bot Mode Settings -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-lock"></i>
+                Bot Mode
+              </h2>
+              <p class="card-description">Control who can use your bot</p>
+            </div>
+            <div class="card-content">
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-shield-alt"></i>
+                      <div>
+                        <div class="setting-name">Bot Visibility</div>
+                        <div class="setting-desc">Choose between public or private mode</div>
+                      </div>
+                    </div>
+                  </div>
+                  <select class="setting-select" id="botMode">
+                    <option value="public">Public - Anyone can use</option>
+                    <option value="private">Private - Only authorized users</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Private Mode Settings -->
+          <div class="settings-card" id="privateModeSettings" style="display: none;">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-user-shield"></i>
+                Private Mode Configuration
+              </h2>
+              <p class="card-description">Configure access control for private mode</p>
+            </div>
+            <div class="card-content">
+              <div class="settings-list">
+                <div class="setting-item full-width">
+                  <div class="private-mode-info">
+                    <div class="info-box">
+                      <i class="fas fa-info-circle"></i>
+                      <div>
+                        <h4>Private Mode Behavior</h4>
+                        <p>In private mode, only the bot owner (the connected number) can use commands. All other users' commands will be silently ignored.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="setting-item full-width">
+                  <div class="setting-info">
+                    <label for="authorizedUsers" class="form-label">
+                      <i class="fas fa-users"></i>
+                      Additional Authorized Users (Optional)
+                    </label>
+                    <div class="authorized-list" id="authorizedUsersList">
+                      <!-- Authorized users will be populated here -->
+                    </div>
+                    <div class="add-user-section">
+                      <input 
+                        type="text" 
+                        id="newAuthorizedUser" 
+                        class="form-input" 
+                        placeholder="Enter phone number (e.g., 1305678234)"
+                      />
+                      <button type="button" class="btn secondary-btn btn-sm" id="addUserBtn">
+                        <i class="fas fa-plus"></i>
+                        Add User
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Command Settings -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-terminal"></i>
+                Command Settings
+              </h2>
+              <p class="card-description">Customize command behavior</p>
+            </div>
+            <div class="card-content">
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-hashtag"></i>
+                      <div>
+                        <div class="setting-name">Command Prefix</div>
+                        <div class="setting-desc">Character used before commands (e.g., . / !)</div>
+                      </div>
+                    </div>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="commandPrefix" 
+                    class="prefix-input" 
+                    maxlength="1"
+                    value="."
+                    placeholder="."
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advanced Settings -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fas fa-cog"></i>
+                Advanced Settings
+              </h2>
+              <p class="card-description">Additional bot configuration options</p>
+            </div>
+            <div class="card-content">
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-main">
+                      <i class="fas fa-clock"></i>
+                      <div>
+                        <div class="setting-name">Auto-Read Messages</div>
+                        <div class="setting-desc">Automatically mark messages as read</div>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="autoRead">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="settings-actions">
+            <div class="status-message" id="settingsStatus"></div>
+            <button class="btn primary-btn" id="saveSettings">
+              <i class="fas fa-save"></i>
+              <span>Save All Settings</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="dashboard-footer">
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> Void V4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="settings.js"></script>
+</body>
+</html>
