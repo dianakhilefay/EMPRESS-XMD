@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Void V4 - Enterprise WhatsApp Bot Gateway</title>
+  <meta name="description" content="Transform your business communication with Void V4 - The ultimate enterprise WhatsApp bot gateway with AI, automation, and powerful integrations.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Enterprise Gateway</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#features"><i class="fas fa-star"></i> Features</a>
+      <a href="#pricing"><i class="fas fa-tag"></i> Pricing</a>
+      <a href="#testimonials"><i class="fas fa-quote-left"></i> Testimonials</a>
+      <a href="#pricing"><i class="fas fa-link"></i> Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-bolt"></i>
+        <span>Enterprise-Grade WhatsApp Automation</span>
+      </div>
+      <h1 class="hero-title">Transform Your Business with <span class="gradient-text">Void V4</span></h1>
+      <p class="hero-description">The ultimate enterprise WhatsApp bot gateway. Automate conversations, integrate AI, and scale your business communication effortlessly.</p>
+      
+      <div class="hero-actions">
+        <a href="#pricing" class="btn primary-btn hero-btn">
+          <i class="fas fa-rocket"></i> Get Started Free
+        </a>
+        <a href="#features" class="btn secondary-btn hero-btn">
+          <i class="fas fa-play-circle"></i> See Features
+        </a>
+      </div>
+
+      <!-- Stats Container -->
+      <div class="stats-container">
+        <div class="stat-card active">
+          <div class="stat-icon">
+            <i class="fas fa-signal"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="activeSockets">0</div>
+            <div class="stat-label">Active Connections</div>
+          </div>
+        </div>
+
+        <div class="stat-card total">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalUsers">0</div>
+            <div class="stat-label">Total Users</div>
+          </div>
+        </div>
+
+        <div class="stat-card performance">
+          <div class="stat-icon">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="section-header">
+        <h2><i class="fas fa-star"></i> Powerful Features</h2>
+        <p class="section-subtitle">Everything you need to build the perfect WhatsApp automation</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon gradient-1">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI Integration</h3>
+          <p>Advanced AI-powered responses with image generation, music creation, and intelligent conversation handling.</p>
+          <div class="feature-tags">
+            <span class="tag">FluxAI</span>
+            <span class="tag">Suno</span>
+            <span class="tag">GPT</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-2">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Creative Tools</h3>
+          <p>Generate stunning logos, text effects, and custom graphics with 50+ creative templates and styles.</p>
+          <div class="feature-tags">
+            <span class="tag">Logo Maker</span>
+            <span class="tag">Effects</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-3">
+            <i class="fas fa-download"></i>
+          </div>
+          <h3>Media Downloader</h3>
+          <p>Download content from YouTube, TikTok, Instagram, and more. Convert audio, video, and documents seamlessly.</p>
+          <div class="feature-tags">
+            <span class="tag">YT</span>
+            <span class="tag">TikTok</span>
+            <span class="tag">IG</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-4">
+            <i class="fas fa-users-cog"></i>
+          </div>
+          <h3>Group Management</h3>
+          <p>Complete group administration tools with moderation, welcome messages, and automated responses.</p>
+          <div class="feature-tags">
+            <span class="tag">Moderation</span>
+            <span class="tag">Auto-Reply</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-5">
+            <i class="fas fa-magic"></i>
+          </div>
+          <h3>Sticker Creator</h3>
+          <p>Create custom stickers, convert images, and add effects to make your conversations more engaging.</p>
+          <div class="feature-tags">
+            <span class="tag">Custom</span>
+            <span class="tag">Animated</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-6">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <h3>Fun & Entertainment</h3>
+          <p>Jokes, flirt lines, reactions, and interactive commands to keep your users engaged and entertained.</p>
+          <div class="feature-tags">
+            <span class="tag">Jokes</span>
+            <span class="tag">Reactions</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-1">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Enterprise Security</h3>
+          <p>Multi-user isolation, secure sessions, and data encryption to protect your business communications.</p>
+          <div class="feature-tags">
+            <span class="tag">Encrypted</span>
+            <span class="tag">Secure</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gradient-2">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>Customizable</h3>
+          <p>Custom prefixes, auto-status features, and personalized settings for each user session.</p>
+          <div class="feature-tags">
+            <span class="tag">Flexible</span>
+            <span class="tag">Scalable</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+      <div class="section-header">
+        <h2><i class="fas fa-tag"></i> Simple Pricing</h2>
+        <p class="section-subtitle">Start free, upgrade when you need more power</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card free">
+          <div class="pricing-badge">Free Forever</div>
+          <div class="pricing-header">
+            <h3>Starter</h3>
+            <div class="price">
+              <span class="currency">$</span>
+              <span class="amount">0</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Access to all bot commands</li>
+            <li><i class="fas fa-check"></i> 1 active session</li>
+            <li><i class="fas fa-check"></i> 100 messages per month</li>
+            <li><i class="fas fa-check"></i> Basic AI features</li>
+            <li><i class="fas fa-check"></i> Community support</li>
+            <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
+            <li class="disabled"><i class="fas fa-times"></i> Advanced analytics</li>
+            <li class="disabled"><i class="fas fa-times"></i> Custom branding</li>
+          </ul>
+          <a href="/login" class="btn pricing-btn primary-starter">
+            <i class="fas fa-rocket"></i> Get Started Now
+          </a>
+        </div>
+
+        <div class="pricing-card pro featured">
+          <div class="pricing-badge popular">Most Popular</div>
+          <div class="pricing-header">
+            <h3>Professional</h3>
+            <div class="price">
+              <span class="currency">$</span>
+              <span class="amount">29</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Everything in Starter</li>
+            <li><i class="fas fa-check"></i> 5 active sessions</li>
+            <li><i class="fas fa-check"></i> Unlimited messages</li>
+            <li><i class="fas fa-check"></i> Advanced AI features</li>
+            <li><i class="fas fa-check"></i> Priority support 24/7</li>
+            <li><i class="fas fa-check"></i> Advanced analytics</li>
+            <li><i class="fas fa-check"></i> Custom branding</li>
+            <li><i class="fas fa-check"></i> API access</li>
+          </ul>
+          <button class="btn pricing-btn" disabled style="opacity: 0.6; cursor: not-allowed;">
+            <i class="fas fa-clock"></i> Coming Soon
+          </button>
+        </div>
+
+        <div class="pricing-card enterprise">
+          <div class="pricing-badge">Custom</div>
+          <div class="pricing-header">
+            <h3>Enterprise</h3>
+            <div class="price">
+              <span class="amount">Custom</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Everything in Pro</li>
+            <li><i class="fas fa-check"></i> Unlimited sessions</li>
+            <li><i class="fas fa-check"></i> Unlimited messages</li>
+            <li><i class="fas fa-check"></i> Dedicated support</li>
+            <li><i class="fas fa-check"></i> Custom integrations</li>
+            <li><i class="fas fa-check"></i> White-label solution</li>
+            <li><i class="fas fa-check"></i> SLA guarantee</li>
+            <li><i class="fas fa-check"></i> On-premise deployment</li>
+          </ul>
+          <a href="#connect" class="btn pricing-btn">
+            <i class="fas fa-envelope"></i> Contact Sales
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+      <div class="section-header">
+        <h2><i class="fas fa-quote-left"></i> What Our Users Say</h2>
+        <p class="section-subtitle">Join thousands of satisfied businesses using Void V4</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Void V4 transformed how we handle customer support. The AI integration is phenomenal and saves us hours every day!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar gradient-1">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Sarah Johnson</h4>
+              <p>CEO, TechStart Inc</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"The multi-user support and group management features are exactly what we needed. Best WhatsApp bot platform out there!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar gradient-2">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Marcus Chen</h4>
+              <p>Marketing Director, Growth Co</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Easy setup, powerful features, and excellent support. Void V4 helped us automate 80% of our WhatsApp interactions!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar gradient-3">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Emily Rodriguez</h4>
+              <p>Founder, Digital Agency</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="connect" class="card connect-section">
+      <div class="section-header">
+        <h2><i class="fas fa-rocket"></i> Ready to Transform Your Business?</h2>
+        <p class="section-subtitle">Join thousands of businesses automating their WhatsApp communications</p>
+      </div>
+      
+      <div class="cta-content">
+        <div class="cta-features">
+          <div class="cta-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Free account with no credit card required</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Set up in under 5 minutes</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>24/7 premium support available</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>No long-term contracts</span>
+          </div>
+        </div>
+        
+        <div class="cta-actions">
+          <a href="/register" class="btn primary-btn cta-btn">
+            <i class="fas fa-user-plus"></i> Create Free Account
+          </a>
+          <a href="/login" class="btn secondary-btn cta-btn">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </a>
+        </div>
+        
+        <p class="cta-note">
+          <i class="fas fa-shield-alt"></i> Enterprise-grade security with end-to-end encryption
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column brand-column">
+          <div class="footer-brand">
+            <div class="footer-logo">V4</div>
+            <div>
+              <div class="footer-brand-name">VOID V4</div>
+              <div class="footer-brand-tagline">Enterprise Gateway</div>
+            </div>
+          </div>
+          <p class="footer-description">Transform your business communication with the most powerful WhatsApp bot gateway platform.</p>
+          <div class="social-links">
+            <a href="https://github.com/XdKing2/MALVIN-XD" target="_blank" class="social-link">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbB3YxTDJ6H15SKoBv3S" target="_blank" class="social-link">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#pricing">Get Started</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/XdKing2/MALVIN-XD" target="_blank">Documentation</a></li>
+            <li><a href="https://github.com/XdKing2/MALVIN-XD" target="_blank">API Reference</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Void V4 Enterprise. Powered by Malvin Tech. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <span class="separator">•</span>
+          <a href="#">Terms of Service</a>
+          <span class="separator">•</span>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- socket.io client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- frontend logic -->
+  <script src="scripts.js"></script>
+  
+</body>
+</html>
