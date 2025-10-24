@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard - Void V4 Enterprise Gateway</title>
+  <meta name="description" content="Manage your Void V4 WhatsApp bot dashboard.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-text">V4</div>
+      </div>
+      <div class="splash-text">Loading Dashboard...</div>
+      <div class="splash-progress">
+        <div class="splash-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="dashboard-nav">
+    <div class="brand">
+      <div class="logo">V4</div>
+      <div>
+        <div class="brand-name">VOID V4</div>
+        <div class="brand-subtitle">Dashboard</div>
+      </div>
+    </div>
+    
+    <div class="nav-actions">
+      <button class="nav-icon-btn" id="notificationBtn" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+      </button>
+      
+      <div class="profile-dropdown">
+        <button class="nav-icon-btn profile-btn" id="profileBtn">
+          <i class="fas fa-user-circle"></i>
+        </button>
+        <div class="dropdown-menu" id="profileMenu">
+          <div class="dropdown-header">
+            <div class="dropdown-user-info">
+              <i class="fas fa-user-circle dropdown-avatar"></i>
+              <div>
+                <div class="dropdown-username" id="dropdownUsername">Loading...</div>
+                <div class="dropdown-email" id="dropdownEmail">Loading...</div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/profile" class="dropdown-item">
+            <i class="fas fa-user"></i>
+            <span>My Profile</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+      
+      <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar-header">
+      <h3>Menu</h3>
+      <button class="close-sidebar" id="closeSidebar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-sidebar-content">
+      <a href="/dashboard" class="sidebar-link active">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="/profile" class="sidebar-link">
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </a>
+      <a href="/settings" class="sidebar-link">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+      <a href="/ticket" class="sidebar-link">
+        <i class="fas fa-ticket-alt"></i>
+        <span>Support Ticket</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div class="dashboard-container">
+      <!-- Welcome Section -->
+      <div class="welcome-section">
+        <div class="welcome-content">
+          <h1 class="welcome-title">Welcome back, <span id="welcomeUsername">User</span>! 👋</h1>
+          <p class="welcome-subtitle">Here's what's happening with your bot today</p>
+        </div>
+        <div class="account-badge" id="accountBadge">
+          <i class="fas fa-crown"></i>
+          <span id="accountType">Free</span>
+        </div>
+      </div>
+
+      <!-- Balance Section (Compact) -->
+      <div class="balance-compact-section">
+        <div class="balance-compact-card">
+          <div class="balance-compact-main">
+            <div class="balance-compact-info">
+              <span class="balance-compact-label">Balance</span>
+              <div class="balance-compact-amount">
+                <span id="userBalance">0</span>
+                <span class="balance-compact-currency">Credits</span>
+              </div>
+              <div class="credit-time-estimate">
+                <i class="fas fa-hourglass-half"></i>
+                <span id="creditTimeEstimate">--</span>
+              </div>
+            </div>
+            <button class="btn-add-coins" id="addCreditsBtn">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Coins</span>
+            </button>
+          </div>
+          <div class="balance-compact-stats">
+            <div class="stat-mini">
+              <i class="fas fa-gift"></i>
+              <div>
+                <div class="stat-mini-value" id="referralCount">0</div>
+                <div class="stat-mini-label">Referrals</div>
+              </div>
+            </div>
+            <div class="stat-mini">
+              <i class="fas fa-coins"></i>
+              <div>
+                <div class="stat-mini-value" id="earnedCredits">0</div>
+                <div class="stat-mini-label">Earned</div>
+              </div>
+            </div>
+            <div class="stat-mini">
+              <i class="fas fa-share-alt"></i>
+              <div>
+                <div class="stat-mini-value" id="userReferralCode">Loading...</div>
+                <div class="stat-mini-label">Referral Code</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon sessions">
+            <i class="fas fa-signal"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Active Sessions</div>
+            <div class="stat-value" id="activeSessions">0</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon status">
+            <i class="fas fa-circle"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Bot Status</div>
+            <div class="stat-value" id="botStatus">Offline</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Referral Link Section (Compact) -->
+      <div class="referral-compact-section">
+        <div class="referral-compact-card">
+          <div class="referral-compact-header">
+            <h3 class="referral-compact-title">
+              <i class="fas fa-users"></i>
+              Refer & Earn
+            </h3>
+            <span class="referral-compact-badge">+1 Credit/Referral</span>
+          </div>
+          <p class="referral-compact-desc">Share your link and earn credits!</p>
+          <div class="referral-compact-input-group">
+            <input type="text" class="referral-compact-input" id="referralLinkInput" readonly value="Loading...">
+            <button class="referral-compact-btn" id="copyReferralBtn" title="Copy Link">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button class="referral-compact-btn" id="shareReferralBtn" title="Share Link">
+              <i class="fas fa-share-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-grid">
+        <!-- Connect Bot Section -->
+        <div class="dashboard-card connect-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-plug"></i>
+              Connect Bot
+            </h2>
+          </div>
+          <div class="card-content">
+            <div class="connect-form" id="connectForm">
+              <p class="connect-description">Enter your WhatsApp number (numbers only, no + or spaces)</p>
+              <div class="form-group">
+                <label for="phoneNumber" class="form-label">
+                  <i class="fas fa-phone"></i>
+                  Phone Number (with country code)
+                </label>
+                <input 
+                  type="tel" 
+                  id="phoneNumber" 
+                  class="form-input" 
+                  placeholder="1234567890"
+                  required
+                />
+              </div>
+              <button type="button" class="btn primary-btn" id="connectBtn">
+                <i class="fas fa-link"></i>
+                <span>Connect WhatsApp</span>
+              </button>
+            </div>
+            <div class="qr-container" id="qrContainer" style="display: none;">
+              <canvas id="qrcode"></canvas>
+              <p class="qr-instructions">Scan this QR code with WhatsApp</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Session Section -->
+        <div class="dashboard-card session-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-server"></i>
+              Active Session
+            </h2>
+            <div class="session-counter" id="sessionCounter" style="display: none;">
+              <span id="currentSessionIndex">1</span>/<span id="totalSessions">1</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="session-carousel-container">
+              <button class="carousel-btn carousel-prev" id="sessionPrevBtn" style="display: none;">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              
+              <div class="session-carousel" id="sessionCarousel">
+                <div class="session-carousel-track" id="sessionCarouselTrack">
+                  <div class="session-slide">
+                    <div class="session-info" id="sessionInfo">
+                      <div class="no-session" id="noSession">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>No active session</p>
+                        <small>Connect your bot to see session details</small>
+                      </div>
+                      
+                      <div class="session-details" id="sessionDetails" style="display: none;">
+                        <div class="session-item">
+                          <div class="session-label">
+                            <i class="fas fa-phone"></i>
+                            Phone Number
+                          </div>
+                          <div class="session-value" id="sessionPhone">-</div>
+                        </div>
+                        <div class="session-item">
+                          <div class="session-label">
+                            <i class="fas fa-clock"></i>
+                            Connected Since
+                          </div>
+                          <div class="session-value" id="sessionTime">-</div>
+                        </div>
+                        <div class="session-item">
+                          <div class="session-label">
+                            <i class="fas fa-circle"></i>
+                            Status
+                          </div>
+                          <div class="session-value">
+                            <span class="status-badge connected" id="sessionStatusBadge">Connected</span>
+                          </div>
+                        </div>
+                        
+                        <div class="session-controls">
+                          <button class="btn secondary-btn btn-sm" id="stopBtn">
+                            <i class="fas fa-stop"></i>
+                            <span>Stop</span>
+                          </button>
+                          <button class="btn danger-btn btn-sm" id="deleteBtn" style="display: none;">
+                            <i class="fas fa-trash"></i>
+                            <span>Delete</span>
+                          </button>
+                          <button class="btn primary-btn btn-sm" id="startBtn" style="display: none;">
+                            <i class="fas fa-play"></i>
+                            <span>Start</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <button class="carousel-btn carousel-next" id="sessionNextBtn" style="display: none;">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            
+            <div class="session-dots" id="sessionDots" style="display: none;"></div>
+          </div>
+        </div>
+
+        <!-- Quick Settings Section -->
+        <div class="dashboard-card settings-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-sliders-h"></i>
+              Quick Settings
+            </h2>
+            <a href="/settings" class="card-link">
+              View All <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <i class="fas fa-eye"></i>
+                  <span>Auto Status View</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="autoStatusView">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-info">
+                  <i class="fas fa-heart"></i>
+                  <span>Auto Status Like</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="autoStatusLike">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-info">
+                  <i class="fas fa-lock"></i>
+                  <span>Bot Mode</span>
+                </div>
+                <select class="setting-select" id="botMode">
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="dashboard-card activity-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-history"></i>
+              Recent Activity
+            </h2>
+          </div>
+          <div class="card-content">
+            <div class="activity-list" id="activityList">
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-text">Bot connected successfully</div>
+                  <div class="activity-time">Just now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Panel -->
+  <div class="notification-panel" id="notificationPanel">
+    <div class="notification-header">
+      <h3>Notifications</h3>
+      <div class="notification-header-actions">
+        <button class="mark-all-read-btn" id="markAllReadBtn" title="Mark all as read">
+          <i class="fas fa-check-double"></i>
+        </button>
+        <button class="close-panel" id="closeNotifications">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="notification-list" id="notificationList">
+      <div class="notification-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Loading notifications...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Coins Modal -->
+  <div class="credits-modal" id="creditsModal">
+    <div class="credits-modal-content">
+      <div class="credits-modal-header">
+        <h3 class="credits-modal-title">
+          <i class="fas fa-coins"></i>
+          Add Coins
+        </h3>
+        <button class="close-modal-btn" id="closeModalBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="credits-modal-body">
+        <p class="modal-description">Choose a package to add coins to your account</p>
+        
+        <!-- Package Options -->
+        <div class="packages-grid">
+          <!-- Basic Package -->
+          <div class="package-card" data-package="basic">
+            <div class="package-header">
+              <h4 class="package-name">Basic</h4>
+            </div>
+            <div class="package-coins">
+              <i class="fas fa-coins"></i>
+              <span class="coins-amount">200</span>
+              <span class="coins-label">Coins</span>
+            </div>
+            <div class="package-price">
+              <span class="price-amount">$2.50</span>
+              <span class="price-label">USD</span>
+            </div>
+            <div class="package-features">
+              <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Instant delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Standard Package -->
+          <div class="package-card" data-package="standard">
+            <div class="package-header">
+              <h4 class="package-name">Standard</h4>
+            </div>
+            <div class="package-coins">
+              <i class="fas fa-coins"></i>
+              <span class="coins-amount">500</span>
+              <span class="coins-label">Coins</span>
+            </div>
+            <div class="package-price">
+              <span class="price-amount">$6.25</span>
+              <span class="price-label">USD</span>
+            </div>
+            <div class="package-features">
+              <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Instant delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Premium Package -->
+          <div class="package-card" data-package="premium">
+            <div class="package-header">
+              <h4 class="package-name">Premium</h4>
+            </div>
+            <div class="package-coins">
+              <i class="fas fa-coins"></i>
+              <span class="coins-amount">800</span>
+              <span class="coins-label">Coins</span>
+            </div>
+            <div class="package-price">
+              <span class="price-amount">$10.00</span>
+              <span class="price-label">USD</span>
+            </div>
+            <div class="package-features">
+              <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Instant delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ultimate Package (Best Value) -->
+          <div class="package-card best-value" data-package="ultimate">
+            <div class="package-badge">
+              <i class="fas fa-star"></i>
+              <span>25% OFF</span>
+            </div>
+            <div class="package-header">
+              <h4 class="package-name">Ultimate</h4>
+            </div>
+            <div class="package-coins">
+              <i class="fas fa-coins"></i>
+              <span class="coins-amount">1500</span>
+              <span class="coins-label">Coins</span>
+            </div>
+            <div class="package-price">
+              <span class="price-amount">$15.00</span>
+              <span class="price-label">USD</span>
+              <span class="price-original">$20.00</span>
+            </div>
+            <div class="package-features">
+              <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Instant delivery</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-star"></i>
+                <span>Best value!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="payment-info">
+          <i class="fab fa-paypal"></i>
+          <span>Secure payment powered by PayPal</span>
+        </div>
+      </div>
+      <div class="credits-modal-footer">
+        <button class="modal-btn modal-btn-cancel" id="cancelModalBtn">Cancel</button>
+        <button class="modal-btn modal-btn-confirm" id="confirmPaymentBtn" disabled>
+          <i class="fab fa-paypal"></i>
+          <span>Pay with PayPal</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="dashboard-footer">
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> Void V4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- socket.io client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+  <!-- Dashboard Script -->
+  <script src="dashboard.js"></script>
+</body>
+</html>
