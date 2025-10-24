@@ -571,9 +571,10 @@ app.post("/api/auth/register", requireDatabaseReady, async (req, res) => {
 
         // Send verification email
         if (isEmailConfigured()) {
-            const emailSent = await sendVerificationEmail(email.toLowerCase(), username, verificationCode);
-            if (!emailSent) {
+            const emailResult = await sendVerificationEmail(email.toLowerCase(), username, verificationCode);
+            if (emailResult !== true && emailResult.success === false) {
                 console.warn('⚠️ Failed to send verification email, but user was created');
+                console.warn('⚠️ Email error:', emailResult.error);
             }
         } else {
             console.warn('⚠️ Email service not configured. User created without verification email.');
@@ -687,17 +688,33 @@ app.post("/api/auth/resend-verification", requireDatabaseReady, async (req, res)
         const verificationCode = generateVerificationCode();
         const verificationCodeExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
 
+        // Save verification code to database first
         user.verificationCode = verificationCode;
         user.verificationCodeExpiry = verificationCodeExpiry;
         await user.save();
+        
+        console.log(`📝 New verification code generated for ${username}: ${verificationCode}`);
+        console.log(`⏰ Code expires at: ${verificationCodeExpiry.toISOString()}`);
 
         // Send verification email
         if (isEmailConfigured()) {
-            const emailSent = await sendVerificationEmail(email.toLowerCase(), username, verificationCode);
-            if (!emailSent) {
-                return res.status(500).json({ error: "Failed to send verification email" });
+            console.log(`📧 Attempting to send verification email to ${email.toLowerCase()}...`);
+            const emailResult = await sendVerificationEmail(email.toLowerCase(), username, verificationCode);
+            
+            // Check if email sending failed
+            if (emailResult !== true && emailResult.success === false) {
+                console.error(`❌ Failed to send verification email to ${email}:`, emailResult.error);
+                console.error(`❌ Full error details:`, emailResult.details);
+                return res.status(500).json({ 
+                    error: "Failed to send verification email",
+                    details: emailResult.error,
+                    note: "Your verification code has been saved. You can try requesting a new code in a moment, or contact support if the issue persists."
+                });
             }
+            
+            console.log(`✅ Verification email sent successfully to ${email}`);
         } else {
+            console.error(`❌ Email service not configured - cannot send verification email`);
             return res.status(503).json({ error: "Email service not configured" });
         }
 
