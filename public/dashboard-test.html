@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard UI Test - Delete Button</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0a0e27;
+      --bg-secondary: #10152b;
+      --bg-tertiary: #1a1f3a;
+      --bg-card: #1e2442;
+      --text-primary: #e8eaed;
+      --text-secondary: #9aa0b4;
+      --text-muted: #6b7280;
+      --accent-primary: #00d4ff;
+      --accent-secondary: #7b2cbf;
+      --border-default: rgba(255, 255, 255, 0.1);
+      --success: #22c55e;
+      --error: #f85149;
+      --warning: #f59e0b;
+      --radius-md: 12px;
+      --transition-base: all 0.3s ease;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 2rem;
+      margin: 0;
+    }
+    
+    .demo-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      border: 1px solid var(--border-default);
+    }
+    
+    h1 {
+      color: var(--accent-primary);
+      margin-bottom: 2rem;
+    }
+    
+    .session-details {
+      background: var(--bg-tertiary);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 2rem;
+    }
+    
+    .session-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-default);
+    }
+    
+    .session-item:last-child {
+      border-bottom: none;
+    }
+    
+    .session-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .session-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .status-badge.connected {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--success);
+    }
+    
+    .status-badge.paused {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    
+    .session-controls {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition-base);
+      text-decoration: none;
+    }
+    
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .primary-btn {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-primary);
+    }
+    
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+    }
+    
+    .secondary-btn {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+    
+    .secondary-btn:hover {
+      background: var(--bg-secondary);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    
+    .danger-btn {
+      background: var(--bg-tertiary);
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
+    
+    .danger-btn:hover {
+      background: var(--error);
+      color: var(--bg-primary);
+      box-shadow: 0 4px 12px rgba(248, 81, 73, 0.3);
+    }
+    
+    .section-title {
+      font-size: 1.25rem;
+      margin: 2rem 0 1rem 0;
+      color: var(--accent-primary);
+    }
+    
+    .note {
+      background: var(--bg-tertiary);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--accent-primary);
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1><i class="fas fa-server"></i> Session Control UI Demo</h1>
+    
+    <div class="note">
+      <strong>✨ New Feature:</strong> The restart button has been replaced with a professional delete button with trash icon.
+    </div>
+    
+    <div class="section-title">When Session is Active (Connected)</div>
+    <div class="session-details">
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-phone"></i>
+          Phone Number
+        </div>
+        <div class="session-value">+1234567890</div>
+      </div>
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-clock"></i>
+          Connected Since
+        </div>
+        <div class="session-value">2025-01-15 10:30 AM</div>
+      </div>
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-circle"></i>
+          Status
+        </div>
+        <div class="session-value">
+          <span class="status-badge connected">Connected</span>
+        </div>
+      </div>
+      
+      <div class="session-controls">
+        <button class="btn secondary-btn btn-sm">
+          <i class="fas fa-stop"></i>
+          <span>Stop</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="section-title">When Session is Paused (Stopped)</div>
+    <div class="session-details">
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-phone"></i>
+          Phone Number
+        </div>
+        <div class="session-value">+1234567890</div>
+      </div>
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-clock"></i>
+          Connected Since
+        </div>
+        <div class="session-value">2025-01-15 10:30 AM</div>
+      </div>
+      <div class="session-item">
+        <div class="session-label">
+          <i class="fas fa-circle"></i>
+          Status
+        </div>
+        <div class="session-value">
+          <span class="status-badge paused">Paused</span>
+        </div>
+      </div>
+      
+      <div class="session-controls">
+        <button class="btn danger-btn btn-sm">
+          <i class="fas fa-trash"></i>
+          <span>Delete</span>
+        </button>
+        <button class="btn primary-btn btn-sm">
+          <i class="fas fa-play"></i>
+          <span>Start</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="note">
+      <strong>🎯 Button Behavior:</strong><br>
+      • <strong>Active Session:</strong> Only "Stop" button is visible<br>
+      • <strong>Paused Session:</strong> "Delete" and "Start" buttons are visible<br>
+      • <strong>Delete Button:</strong> Permanently removes session and auth data (with confirmation)<br>
+      • <strong>Restart Button:</strong> Removed from the UI
+    </div>
+  </div>
+</body>
+</html>
